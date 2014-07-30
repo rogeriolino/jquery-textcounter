@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Text Counter</title>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="page-header">jQuery Text Counter <small>Simple plugin to show total input chars left</small></h1>
+            <div class="form-group">
+                <label for="input">Input</label>
+                <input type="text" id="input" class="form-control counter" maxlength="50" data-output="#name-counter">
+                <span id="name-counter" class="label label-default"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Textarea</label>
+                <textarea id="description" class="form-control counter" data-maxlength="200" rows="4" data-output="#description-counter"></textarea>
+                <span id="description-counter" class="label label-default"></span>
+            </div>
+            
+            <h2>Usage</h2>
+            <strong>HTML</strong>
+            <pre>&lt;input type="text" class="counter" maxlength="50" data-output="#my-counter"&gt;</pre>
+            <strong>JS</strong>
+            <pre>$('.counter').textCounter();</pre>
+        </div>
+        
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../src/jquery-textcounter.js"></script>
+        <script>
+            $('.counter').textCounter({
+                change: function(elem, length, pct) {
+                    var styleClass = 'default';
+                    if (pct > 70) {
+                        styleClass = 'danger';
+                    } else if (pct > 30) {
+                        styleClass = 'warning';
+                    }
+                    elem.output.removeClass().addClass('label label-' + styleClass);
+                }
+            });
+        </script>
+    </body>
+</html>
